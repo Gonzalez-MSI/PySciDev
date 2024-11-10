@@ -5,7 +5,6 @@
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
- 
 """
 
 """
@@ -13,20 +12,16 @@ GUI application for plotting and manipulating sine waves using tkinter and matpl
 This application provides an interactive interface allowing users to:
 - Plot sine waves with customizable frequency
 - Adjust amplitude and time scale of the view
+- Add Gaussian noise to the signal
 - Update the plot dynamically
 - Validate numerical inputs
-The GUI includes:
-- Frequency input field
-- Amplitude and time scale controls
-- Plot and view update buttons
-- Interactive matplotlib plot embedded in tkinter window
 Dependencies:
     - tkinter
     - numpy
     - matplotlib
 Author: [Diego Gonzalez Ayala]
 Date: [2024-02-26]
-Version: 1.0
+Version: 1.1
 """
 
 import tkinter as tk
@@ -45,14 +40,18 @@ def validate_number(value):
         return False
 
 def plot_sine():
-    global canvas, current_ax  # Track canvas and axes globally
+    global canvas, current_ax
     
-    # Get frequency from entry field (default to 1 if empty)
+    # Get frequency from entry field
     f = float(freq_entry.get()) if freq_entry.get() else 1
     
     # Get scale values
     amp_scale = float(amp_scale_entry.get()) if amp_scale_entry.get() else 1
     time_scale = float(time_scale_entry.get()) if time_scale_entry.get() else 1
+    
+    # Get noise parameters
+    noise_mean = float(noise_mean_entry.get()) if noise_mean_entry.get() else 0
+    noise_std = float(noise_std_entry.get()) if noise_std_entry.get() else 0.0
     
     # Generate sine wave data
     start = 0.0
@@ -61,13 +60,17 @@ def plot_sine():
     t = np.arange(start, stop, 1/fs)
     signal = np.sin(2 * np.pi * f * t)
     
+    # Add Gaussian noise
+    noise = np.random.normal(noise_mean, noise_std, signal.shape)
+    noisy_signal = signal + noise
+    
     # Create plot
     fig = Figure(figsize=(6, 4))
     ax = fig.add_subplot(111)
-    current_ax = ax  # Store current axes for scale updates
+    current_ax = ax
     
-    ax.plot(t, signal, color='red', linewidth=1.15)
-    ax.set_title(f'Sine Wave ({f} Hz)')
+    ax.plot(t, noisy_signal, color='red', linewidth=1.15)
+    ax.set_title(f'Sine Wave ({f} Hz) \u03C3={noise_std} \u03BC={noise_mean}') 
     ax.set_xlabel('Time (s)')
     ax.set_ylabel('Amplitude')
     ax.grid(True)
@@ -138,6 +141,19 @@ time_scale_entry.pack(pady=2)
 # Update view button
 update_button = tk.Button(right_frame, text="Update View", command=update_view)
 update_button.pack(pady=5)
+
+# Noise controls
+tk.Label(right_frame, text="Noise Controls", font=('Arial', 10, 'bold')).pack(pady=5)
+
+tk.Label(right_frame, text="Noise Mean (\u03BC):").pack(pady=2)
+noise_mean_entry = tk.Entry(right_frame, width=10, validate='key', validatecommand=(validate_cmd, '%P'))
+noise_mean_entry.insert(0, "0")
+noise_mean_entry.pack(pady=2)
+
+tk.Label(right_frame, text="Noise Std Dev (\u03C3):").pack(pady=2)
+noise_std_entry = tk.Entry(right_frame, width=10, validate='key', validatecommand=(validate_cmd, '%P'))
+noise_std_entry.insert(0, "0.0")
+noise_std_entry.pack(pady=2)
 
 # Plot and Exit buttons
 plot_button = tk.Button(top_frame, text="Plot", command=plot_sine)
