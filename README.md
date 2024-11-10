@@ -10,3 +10,4 @@ This application provides an interactive interface allowing users to:
 - Update the plot dynamically
 - Validate numerical inputs
 Version: 1.1
+
