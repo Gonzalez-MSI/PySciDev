@@ -1,3 +1,34 @@
+"""                  
+                GNU GENERAL PUBLIC LICENSE
+                 Version 3, 29 June 2007
+
+ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+ 
+"""
+
+"""
+GUI application for plotting and manipulating sine waves using tkinter and matplotlib.
+This application provides an interactive interface allowing users to:
+- Plot sine waves with customizable frequency
+- Adjust amplitude and time scale of the view
+- Update the plot dynamically
+- Validate numerical inputs
+The GUI includes:
+- Frequency input field
+- Amplitude and time scale controls
+- Plot and view update buttons
+- Interactive matplotlib plot embedded in tkinter window
+Dependencies:
+    - tkinter
+    - numpy
+    - matplotlib
+Author: [Diego Gonzalez Ayala]
+Date: [2024-02-26]
+Version: 1.0
+"""
+
 import tkinter as tk
 from tkinter import ttk
 import numpy as np
