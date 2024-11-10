@@ -3,6 +3,7 @@ Personal repository for python projects development that are intentended to cont
 
 # Sinewave Plotter GUI - tkinter
 GUI application for plotting and manipulating sine waves using tkinter and matplotlib.
+
 This application provides an interactive interface allowing users to:
 - Plot sine waves with customizable parameters:
   * Frequency (Hz)
@@ -15,6 +16,9 @@ This application provides an interactive interface allowing users to:
 - Add and control Gaussian noise:
   * Mean (μ)
   * Standard deviation (σ)
+- Plot appearance:
+  * Line color
+  * Line width
 - Update plot dynamically
 - Real-time input validation
   
