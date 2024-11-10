@@ -9,18 +9,31 @@
 
 """
 GUI application for plotting and manipulating sine waves using tkinter and matplotlib.
+
 This application provides an interactive interface allowing users to:
-- Plot sine waves with customizable parameters (frequency, amplitude, phase, offset)
-- Adjust view scale and time window
-- Add Gaussian noise to the signal
-- Update the plot dynamically
+- Plot sine waves with customizable parameters:
+  * Frequency (Hz)
+  * Amplitude 
+  * Phase (degrees)
+  * Vertical offset
+- Control view properties:
+  * Amplitude scaling
+  * Time window
+- Add and control Gaussian noise:
+  * Mean (μ)
+  * Standard deviation (σ)
+- Update plot dynamically
+- Real-time input validation
+
 Dependencies:
-    - tkinter
-    - numpy
-    - matplotlib
+    - tkinter: GUI framework
+    - numpy: Numerical computations
+    - matplotlib: Plotting library
+    - FigureCanvasTkAgg: Matplotlib-tkinter integration
+
 Author: [Diego Gonzalez Ayala]
 Date: [2024-02-26]
-Version: 1.2
+Version: 1.3
 """
 
 import tkinter as tk
