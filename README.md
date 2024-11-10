@@ -20,4 +20,4 @@ This application provides an interactive interface allowing users to:
   
 Version: 1.1
 
-![SineWavePlotterM1](https://github.com/user-attachments/assets/7a3a01e7-9f64-4ad5-80d8-381ba6680949)
+![SineWavePlotter2](https://github.com/user-attachments/assets/a3084539-3430-4bf0-8410-cb606b2ad92f)
