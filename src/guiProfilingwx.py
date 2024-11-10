@@ -22,6 +22,9 @@ This application provides an interactive interface allowing users to:
 - Add and control Gaussian noise:
   * Mean (μ)
   * Standard deviation (σ)
+- Plot appearance:
+  * Line color
+  * Line width
 - Update plot dynamically
 - Real-time input validation
 
@@ -33,7 +36,7 @@ Dependencies:
 
 Author: [Diego Gonzalez Ayala]
 Date: [2024-02-26]
-Version: 1.3
+Version: 1.4
 """
 
 import tkinter as tk
@@ -68,6 +71,9 @@ def plot_sine():
     # Get noise parameters
     noise_mean = float(noise_mean_entry.get()) if noise_mean_entry.get() else 0
     noise_std = float(noise_std_entry.get()) if noise_std_entry.get() else 0.0
+
+    # Get plot appearance parameters
+    line_width = float(line_width_entry.get()) if line_width_entry.get() else 1.15
     
     # Generate sine wave data
     start = 0.0
@@ -85,7 +91,7 @@ def plot_sine():
     ax = fig.add_subplot(111)
     current_ax = ax
     
-    ax.plot(t, noisy_signal, color='red', linewidth=1.15)
+    ax.plot(t, noisy_signal, color=color_var.get(), linewidth=line_width)
     ax.set_title(f'Sine Wave: {f}Hz, A={amplitude}, φ={phase:.2f}, offset={offset}\nσ={noise_std:.2f} μ={noise_mean:.2f}')
     ax.set_xlabel('Time (s)')
     ax.set_ylabel('Amplitude')
@@ -202,6 +208,20 @@ tk.Label(right_frame, text="Noise Std Dev (σ):").pack(pady=2)
 noise_std_entry = tk.Entry(right_frame, width=10, validate='key', validatecommand=(validate_cmd, '%P'))
 noise_std_entry.insert(0, "0.0")
 noise_std_entry.pack(pady=2)
+
+# Plot appearance controls
+tk.Label(right_frame, text="Plot Controls", font=('Arial', 10, 'bold')).pack(pady=5)
+
+tk.Label(right_frame, text="Line Color:").pack(pady=2)
+color_choices = ['red', 'blue', 'green', 'black', 'purple', 'orange']
+color_var = tk.StringVar(value='red')
+color_menu = ttk.Combobox(right_frame, textvariable=color_var, values=color_choices, width=7)
+color_menu.pack(pady=2)
+
+tk.Label(right_frame, text="Line Width:").pack(pady=2)
+line_width_entry = tk.Entry(right_frame, width=10, validate='key', validatecommand=(validate_cmd, '%P'))
+line_width_entry.insert(0, "1.15")
+line_width_entry.pack(pady=2)
 
 # Buttons frame
 button_frame = tk.Frame(top_frame)
