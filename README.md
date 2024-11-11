@@ -46,7 +46,9 @@ This application provides an interactive interface allowing users to:
   * Update processing
   * Real-time preview
   * Parameter validation
-  
+
+<img width="827" alt="IFPAnalyzer" src="https://github.com/user-attachments/assets/4aeb8526-18e5-4a4e-a060-26e347e0fc5d">
+
 To do:
 -
   * Interferogram details identification
