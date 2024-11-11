@@ -11,7 +11,7 @@
 GUI application for plotting and manipulating sine waves using tkinter and matplotlib.
 
 This application provides an interactive interface allowing users to:
-- Plot sine waves with customizable parameters:
+- Plot sine waves with custpomizable parameters:
   * Frequency (Hz)
   * Amplitude 
   * Phase (degrees)
@@ -92,7 +92,7 @@ def plot_sine():
     current_ax = ax
     
     ax.plot(t, noisy_signal, color=color_var.get(), linewidth=line_width)
-    ax.set_title(f'Sine Wave: {f}Hz, A={amplitude}, φ={phase:.2f}, offset={offset}\nσ={noise_std:.2f} μ={noise_mean:.2f}')
+    ax.set_title(f'Sine Wave: {f}Hz, A={amplitude}, φ={phase:.2f}rad, offset={offset}\nσ={noise_std:.2f} μ={noise_mean:.2f}')
     ax.set_xlabel('Time (s)')
     ax.set_ylabel('Amplitude')
     ax.grid(True)
