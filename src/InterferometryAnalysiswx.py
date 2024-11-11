@@ -1,3 +1,44 @@
+"""                  
+                GNU GENERAL PUBLIC LICENSE
+                 Version 3, 29 June 2007
+
+ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+"""
+
+"""
+GUI application for analyzing interferograms using Fourier Transform and image processing.
+
+This application provides an interactive interface allowing users to:
+- View and analyze interferogram images:
+  * Original image display
+  * Fourier Transform visualization
+  * Real-time threshold adjustment
+- Control processing parameters:
+  * Threshold level
+  * Image filtering
+  * FFT visualization
+- Image analysis features:
+  * Frequency domain analysis
+  * Noise reduction
+  * Colormap visualization
+- Interactive controls:
+  * Update processing
+  * Real-time preview
+  * Parameter validation
+
+Dependencies:
+    - tkinter: GUI framework
+    - numpy: Numerical computations
+    - opencv-python: Image processing
+    - PIL: Image handling and display
+
+Author: [Diego Gonzalez Ayala]
+Date (D-M-Y): [11-11-2024]
+Version: 1.0
+"""
+
 import cv2
 import numpy as np
 import tkinter as tk

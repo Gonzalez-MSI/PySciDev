@@ -35,7 +35,7 @@ Dependencies:
     - FigureCanvasTkAgg: Matplotlib-tkinter integration
 
 Author: [Diego Gonzalez Ayala]
-Date: [2024-02-26]
+Date (D-M-Y): [10-11-2024]
 Version: 1.4
 """
 
