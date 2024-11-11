@@ -25,3 +25,31 @@ This application provides an interactive interface allowing users to:
 Version: 1.1
 
 ![SineWavePlotter2](https://github.com/user-attachments/assets/a3084539-3430-4bf0-8410-cb606b2ad92f)
+
+# Interferometry Analyzer 
+GUI application for analyzing interferograms using Fourier Transform and image processing.
+
+This application provides an interactive interface allowing users to:
+- View and analyze interferogram images:
+  * Original image display
+  * Fourier Transform visualization
+  * Real-time threshold adjustment
+- Control processing parameters:
+  * Threshold level
+  * Image filtering
+  * FFT visualization
+- Image analysis features:
+  * Frequency domain analysis
+  * Noise reduction
+  * Colormap visualization
+- Interactive controls:
+  * Update processing
+  * Real-time preview
+  * Parameter validation
+  
+To do:
+-
+  * Interferogram details identification
+  * Intensity profile extraction
+  * Magnitude spectrum adquisition
+  * ...
