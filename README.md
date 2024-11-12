@@ -55,3 +55,31 @@ To do:
   * Intensity profile extraction
   * Magnitude spectrum adquisition
   * ...
+
+# Intensity Profile Analyzer
+GUI application for analyzing intensity profiles along lines in images.
+
+This application provides an interactive interface allowing users to:
+- Load and display grayscale/color images
+- Extract intensity profiles by:
+  * Drawing lines with mouse
+  * Entering coordinates manually
+- Display features:
+  * Automatic image scaling
+  * Real-time line preview
+  * Interactive plot updates
+- Profile analysis:
+  * Intensity values along line
+  * Position tracking
+  * Pixel coordinates
+- Image information:
+  * Dimensions display
+  * Scale factor tracking
+  * Coordinate mapping
+
+Dependencies:
+    - tkinter: GUI framework
+    - numpy: Numerical computations
+    - matplotlib: Plotting library
+    - opencv-python (cv2): Image processing
+    - FigureCanvasTkAgg: Matplotlib-tkinter integration
