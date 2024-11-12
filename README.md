@@ -77,9 +77,4 @@ This application provides an interactive interface allowing users to:
   * Scale factor tracking
   * Coordinate mapping
 
-Dependencies:
-    - tkinter: GUI framework
-    - numpy: Numerical computations
-    - matplotlib: Plotting library
-    - opencv-python (cv2): Image processing
-    - FigureCanvasTkAgg: Matplotlib-tkinter integration
+![Screenshot 2024-11-12 002319](https://github.com/user-attachments/assets/ff846ffa-aa01-4974-a28d-0d0879769e0a)
