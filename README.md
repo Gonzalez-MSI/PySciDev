@@ -26,7 +26,7 @@ Version: 1.1
 
 ![SineWavePlotter2](https://github.com/user-attachments/assets/a3084539-3430-4bf0-8410-cb606b2ad92f)
 
-# Interferometry Analyzer 
+# Interferometry Analyzer (FFT adquisition)
 GUI application for analyzing interferograms using Fourier Transform and image processing.
 
 This application provides an interactive interface allowing users to:
