@@ -78,21 +78,31 @@ class IntensityProfiler:
         self.setup_ui()
         
     def setup_ui(self):
-        # Create main frames for layout
-        self.left_frame = tk.Frame(self.root)
-        self.left_frame.pack(side=tk.LEFT, padx=5, pady=5)
+        # Main container frame
+        self.main_container = tk.Frame(self.root)
+        self.main_container.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
-        self.right_frame = tk.Frame(self.root)
-        self.right_frame.pack(side=tk.LEFT, padx=5, pady=5)
+        # Configure grid weights
+        self.main_container.grid_columnconfigure(0, weight=1)  # Image side
+        self.main_container.grid_columnconfigure(1, weight=1)  # Plot side
         
-        # Button and entry frame in left panel
+        # Create left frame for image
+        self.left_frame = tk.Frame(self.main_container, relief=tk.GROOVE, borderwidth=2)
+        self.left_frame.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
+        
+        # Create right frame for plot
+        self.right_frame = tk.Frame(self.main_container, relief=tk.GROOVE, borderwidth=2)
+        self.right_frame.grid(row=0, column=1, sticky="nsew", padx=5, pady=5)
+        
+        # Control panel in left frame
         self.control_frame = tk.Frame(self.left_frame)
         self.control_frame.pack(fill=tk.X)
         
-        # Top row - buttons
+        # Button frame
         self.button_frame = tk.Frame(self.control_frame)
-        self.button_frame.pack(fill=tk.X)
+        self.button_frame.pack(fill=tk.X, pady=5)
         
+        # Buttons
         self.load_btn = tk.Button(self.button_frame, text="Load Image", command=self.load_image)
         self.load_btn.pack(side=tk.LEFT, padx=5)
         
@@ -116,7 +126,7 @@ class IntensityProfiler:
         self.y1_entry = tk.Entry(self.coord_frame, width=5)
         self.y1_entry.pack(side=tk.LEFT, padx=2)
         
-        # End point entries
+        # End point entries  
         tk.Label(self.coord_frame, text="End:").pack(side=tk.LEFT, padx=2)
         tk.Label(self.coord_frame, text="X2:").pack(side=tk.LEFT, padx=2)
         self.x2_entry = tk.Entry(self.coord_frame, width=5)
@@ -126,16 +136,16 @@ class IntensityProfiler:
         self.y2_entry = tk.Entry(self.coord_frame, width=5)
         self.y2_entry.pack(side=tk.LEFT, padx=2)
         
-        # Create canvas for displaying the image
+        # Canvas for image
         self.canvas = tk.Canvas(self.left_frame, width=500, height=500)
         self.canvas.pack(fill=tk.BOTH, expand=True, pady=5)
         
-        # Add dimensions label below canvas
+        # Dimensions label
         self.dim_label = tk.Label(self.left_frame, text="Image dimensions: None")
         self.dim_label.pack(pady=2)
         
-        # Create matplotlib figure for the profile plot
-        self.fig, self.ax = plt.subplots(figsize=(16, 6))  # Increase width from 6 to 10
+        # Plot frame
+        self.fig, self.ax = plt.subplots(figsize=(8, 6))
         self.ax.set_title("Intensity Profile")
         self.ax.set_xlabel("Position along line")
         self.ax.set_ylabel("Intensity")
@@ -236,6 +246,14 @@ class IntensityProfiler:
     def plot_profile(self, profile, num_points):
         self.ax.clear()
         self.ax.plot(range(num_points), profile)
+        
+        # Add padding to y-axis limits
+        y_min = np.min(profile)
+        y_max = np.max(profile)
+        y_padding = (y_max - y_min) * 0.1  # 10% padding
+        
+        self.ax.set_ylim([y_min - y_padding, y_max + y_padding])
+        
         self.ax.set_title("Intensity Profile")
         self.ax.set_xlabel("Position along line")
         self.ax.set_ylabel("Intensity")
