@@ -4,7 +4,7 @@ import numpy as np
 
 # Setup parameters
 gridSize = 10*(LightPipes.mm)
-gridDimension = 500
+gridDimension = 512
 wavelength = 533*(LightPipes.nm)
 phi = 180 * np.pi/180
 Field = LightPipes.Begin(gridSize, wavelength, gridDimension)
