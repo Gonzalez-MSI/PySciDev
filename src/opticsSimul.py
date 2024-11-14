@@ -3,34 +3,36 @@ Optical Interference Pattern Simulation
 This script simulates interference between two Gaussian laser beams using LightPipes library.
 """
 
-# Function Arguments Documentation:
+"""
+Function Arguments Documentation:
 
-# LightPipes.Begin(GridSize, wavelength, GridDimension)
-# - GridSize: Physical size of simulation window (30mm)
-# - wavelength: Laser wavelength (633nm - red light)
-# - GridDimension: Number of pixels (250x250 grid)
+LightPipes.Begin(GridSize, wavelength, GridDimension)
+- GridSize: Physical size of simulation window (30mm)
+- wavelength: Laser wavelength (633nm - red light)
+- GridDimension: Number of pixels (250x250 grid)
 
-# LightPipes.GaussBeam(Field, w0)
-# - Field: Input field from Begin()
-# - w0: Beam waist radius (8mm) - radius where intensity falls to 1/e²
+LightPipes.GaussBeam(Field, w0)
+- Field: Input field from Begin()
+- w0: Beam waist radius (8mm) - radius where intensity falls to 1/e²
 
-# LightPipes.Tilt(Field, angle, direction)
-# - Field: Input field
-# - angle: Tilt angle (0.5 milliradians)
-# - direction: 0 for x-axis tilt, π/2 for y-axis tilt
+LightPipes.Tilt(Field, angle, direction)
+- Field: Input field
+- angle: Tilt angle (0.5 milliradians)
+- direction: 0 for x-axis tilt, π/2 for y-axis tilt
 
-# LightPipes.BeamMix(Field1, Field2)
-# - Field1, Field2: Two fields to be coherently combined
-# Returns: Complex sum of fields
+LightPipes.BeamMix(Field1, Field2)
+- Field1, Field2: Two fields to be coherently combined
+Returns: Complex sum of fields
 
-# LightPipes.Intensity(Field)
-# - Field: Input field
-# Returns: 2D array of intensity values
+LightPipes.Intensity(Field)
+- Field: Input field
+Returns: 2D array of intensity values
 
-# plt.imshow(data, cmap, extent)
-# - data: 2D intensity array
-# - cmap: Color map ('jet' = blue-to-red)
-# - extent: Physical dimensions [-15mm to +15mm]
+plt.imshow(data, cmap, extent)
+- data: 2D intensity array
+- cmap: Color map ('jet' = blue-to-red)
+- extent: Physical dimensions [-15mm to +15mm]
+"""
 
 """
 Units used:
