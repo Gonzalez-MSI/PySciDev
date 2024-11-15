@@ -44,10 +44,11 @@ def setPlot(ax, q, profile, plot_color):
     )
     
 fig = plt.figure(figsize=(11.5, 3.5))    
-fig.suptitle("Gaussian-Bessel Beam Profiles", fontsize=14, fontname="Times New Roman")
+fig.suptitle("Bessel-Gaussian Beam Profiles", fontsize=14, fontname="Times New Roman")
 (ax1, ax2, ax3)  = fig.subplots(1, 3)
 setPlot(ax1, q0, profile0, "blue")
 setPlot(ax2, q1, profile1, "green")
 setPlot(ax3, q2, profile2, "red")
 plt.tight_layout()
+plt.savefig("BesselGaussianBeamProfiles.png", dpi=600)
 plt.show()
