@@ -2,6 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy
 import scipy.special
+import LightPipes
+
+from pyrula import pyrulamap
     
 # Bessel function order
 q0 = 0
@@ -53,19 +56,20 @@ setPlot(ax3, q2, profile2, "red")
 plt.figure(1)  # Activate first figure
 plt.tight_layout()
 
-# Bessel Beam 3D view
+
 x = np.linspace(-20, 20, 1000)
 y = x.reshape(-1, 1)
 r = np.sqrt(x**2 + y**2)
 J3D = np.abs(scipy.special.jv(q0, r))
 beam = np.exp(-(r**2)/(w0**2)) * J3D
+
+# Bessel Beam 3D view
 fig2 = plt.figure(2)  
 ax = plt.axes(projection='3d')
-ax.plot_surface(x/w0, y/w0, beam, cmap='viridis', edgecolor='black', linewidth=0.5)
+ax.plot_surface(x/w0, y/w0, beam, cmap=pyrulamap, edgecolor='black', linewidth=0.5)
 ax.set_title("3D Bessel-Gaussian Beam")
 ax.set_xlabel(r"$\frac{x}{w0}$")
 ax.set_ylabel(r"$\frac{y}{w0}$")
+
 plt.tight_layout()
-
-
 plt.show()
