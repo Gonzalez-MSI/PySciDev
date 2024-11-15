@@ -13,10 +13,11 @@ profile = np.exp(-(pow(L,2))/(pow(w0,2))) * J       # Gaussian beam envelope
 
 fig = plt.figure()
 ax = fig.add_subplot()
-ax.plot(L/w0, profile, color='red')
+ax.plot(L/w0, profile, color='red', label=r"$q=0$")
+ax.legend()
 ax.set_title("Gaussian Beam Profile")
 ax.set_xlabel(r"$\frac{x}{w0}$")
-ax.set_ylabel("Intensity")
+ax.set_ylabel(r"$|E(x)|$")
 ax.grid()
 ax.minorticks_on()
 ax.tick_params(
