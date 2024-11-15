@@ -11,23 +11,18 @@ NZ = N2/ZoomFactor
 
 phi = 179.7/180*3.1415;
 n1=1.5
-z_start =0.001*LightPipes.cm; 
-z_end = 150*LightPipes.cm;
-steps =11;
-delta_z = (z_end-z_start)/steps
-z = z_start
+z =0.001*LightPipes.cm; 
 
 F = LightPipes.Begin(size,wavelength,N);
 F = LightPipes.GaussBeam(F, size/3.5)
 F = LightPipes.Axicon(phi,n1,0,0,F)
+F = LightPipes.Fresnel(F,z)
+I = LightPipes.Intensity(F,0)
 
-for i in range(1,steps): 
-    F = LightPipes.Fresnel(delta_z,F);
-    I = LightPipes.Intensity(0,F);
-    plt.subplot(2,5,i)
-    s ='z= %3.1f m' % (z/LightPipes.m)
-    plt.title(s)
-    plt.imshow(I,cmap='jet');plt.axis('off')
-    plt.axis([N2-NZ, N2+NZ, N2-NZ, N2+NZ])
-    z=z+delta_z
+fig = plt.figure()
+ax = fig.add_subplot()
+ax.imshow(I, cmap='jet')
+ax.set_title("Non-Difractive Beam")
+ax.set_xlabel(r"$x [mm]$")
+ax.set_ylabel(r"$y [mm]$")
 plt.show()
