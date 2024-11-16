@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy
 import scipy.special
+from pyrula import pyrulamap
 
-from colors.pyrula import pyrulamap
     
 # Bessel function order
 q0 = 0

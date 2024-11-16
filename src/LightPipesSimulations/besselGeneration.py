@@ -1,7 +1,7 @@
 import LightPipes
 import numpy as np
 import matplotlib.pyplot as plt
-from colors.pyrula import pyrulamap
+from pyrula import pyrulamap
 
 # Gaussian beam parameters
 GridSize = 10*LightPipes.mm
