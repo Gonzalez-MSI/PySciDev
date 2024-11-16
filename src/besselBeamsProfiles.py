@@ -55,21 +55,47 @@ setPlot(ax2, q1, profile1, "green")
 setPlot(ax3, q2, profile2, "red")
 plt.figure(1)  # Activate first figure
 plt.tight_layout()
-
+fig1.savefig('bessel_2d_profiles.pdf', format='pdf', bbox_inches='tight', dpi=300)
 
 x = np.linspace(-20, 20, 1000)
 y = x.reshape(-1, 1)
 r = np.sqrt(x**2 + y**2)
-J3D = np.abs(scipy.special.jv(q0, r))
-beam = np.exp(-(r**2)/(w0**2)) * J3D
+J0 = np.abs(scipy.special.jv(q0, r))
+J1 = np.abs(scipy.special.jv(q1, r))
+J2 = np.abs(scipy.special.jv(q2, r))
+beam0 = np.exp(-(r**2)/(w0**2)) * J0
+beam1 = np.exp(-(r**2)/(w0**2)) * J1
+beam2 = np.exp(-(r**2)/(w0**2)) * J2
 
-# Bessel Beam 3D view
-fig2 = plt.figure(2)  
-ax = plt.axes(projection='3d')
-ax.plot_surface(x/w0, y/w0, beam, cmap=pyrulamap, edgecolor='black', linewidth=0.5)
-ax.set_title("3D Bessel-Gaussian Beam")
-ax.set_xlabel(r"$\frac{x}{w0}$")
-ax.set_ylabel(r"$\frac{y}{w0}$")
+# Bessel Beam 3D views
+fig2 = plt.figure(figsize=(15, 4))  # Wider rather than taller
+fig2.suptitle("3D Bessel-Gaussian Beam Profiles", fontsize=14, fontname="Times New Roman")
 
-plt.tight_layout()
+# Change to 1x3 layout
+ax1 = fig2.add_subplot(131, projection='3d')
+ax2 = fig2.add_subplot(132, projection='3d')
+ax3 = fig2.add_subplot(133, projection='3d')
+
+# Modified set3DPlot function with better aspect ratio
+def set3DPlot(ax, x, y, beam, q, cmap):
+    surf = ax.plot_surface(x/w0, y/w0, beam, cmap=cmap, edgecolor='black', linewidth=0.5)
+    ax.set_title(rf"$q={q}$")
+    ax.set_xlabel(r"$\frac{x}{w0}$")
+    ax.set_ylabel(r"$\frac{y}{w0}$")
+    ax.set_zlabel(r"$|E(x,y)|$")
+    
+    ax.set_box_aspect([1, 1, 0.7])  # Adjust height ratio
+    ax.grid(True)
+    ax.xaxis.pane.fill = False
+    ax.yaxis.pane.fill = False
+    ax.zaxis.pane.fill = False
+    ax.view_init(elev=25, azim=45)
+    return surf
+
+surf1 = set3DPlot(ax1, x, y, beam0, q0, pyrulamap)
+surf2 = set3DPlot(ax2, x, y, beam1, q1, pyrulamap)
+surf3 = set3DPlot(ax3, x, y, beam2, q2, pyrulamap)
+
+plt.tight_layout(rect=[0, 0, 1, 0.95])  # Adjust spacing for suptitle
+fig2.savefig('bessel_3d_profiles.pdf', format='pdf', bbox_inches='tight', dpi=300)
 plt.show()
