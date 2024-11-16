@@ -38,5 +38,18 @@ ax2.legend()
 ax2.set_title('Gaussian Beam - Intensity')
 ax2.set_xlabel('x [mm]')
 ax2.set_ylabel('Intensity')
+ax2.grid()
+ax2.minorticks_on()
+ax2.tick_params(
+        axis='both', 
+        which='both', 
+        direction='in', 
+        top=True,
+        right=True,
+        left=True,
+        bottom=True,
+        length=2.5,
+        width=1.12
+)
 
 plt.show()
