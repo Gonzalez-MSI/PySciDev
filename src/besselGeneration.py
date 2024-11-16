@@ -18,7 +18,7 @@ Field = LightPipes.Fresnel(Field, z)
 I = LightPipes.Intensity(Field, 0)
 
 N2 = int(GridDimension/2)
-ZoomFactor = 10
+ZoomFactor = 5
 NZ = N2/ZoomFactor
 
 fig = plt.figure() 
