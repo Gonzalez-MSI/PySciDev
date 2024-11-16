@@ -8,7 +8,7 @@ GridSize = 10*LightPipes.mm
 GridDimension = 2000
 wavelength = 632.8*LightPipes.nm
 w0 = 10*LightPipes.mm
-z = 100*LightPipes.mm
+z = 20*LightPipes.cm
 
 # Generate Bessel beam
 Field = LightPipes.Begin(GridSize, wavelength, GridDimension)
