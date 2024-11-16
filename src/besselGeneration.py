@@ -28,5 +28,4 @@ ax.set_title('Gaussian Beam - Intensity')
 ax.set_xlabel('x [mm]')
 ax.set_ylabel('y [mm]')
 ax.axis([N2-NZ, N2+NZ, N2-NZ, N2+NZ])
-
 plt.show()
