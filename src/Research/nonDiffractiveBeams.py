@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.special
-from LightPipesSimulations.pyrula import pyrulamap
+from pyrula import pyrulamap
 
 # Airy Beam
 q = 0.333;
