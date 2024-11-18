@@ -15,7 +15,7 @@ a1=a2=0.1/LightPipes.mm
 w = size/3.5
 z = 0 *LightPipes.cm
 dz = 2 *LightPipes.cm
-alpha = 20.0
+alpha = 0.25
 phi = (180 - 2*alpha) * np.pi/180
 n1 = 1.5
 fig, ax = plt.subplots(); ax.axis('off')
