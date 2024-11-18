@@ -41,4 +41,3 @@ for i in range(1000):
 # Create and save the animation
 ani = animation.ArtistAnimation(fig, ims, interval=5, blit=True, repeat_delay=1000)
 ani.save("GaussianBeamPropagation.mp4")
-plt.show()

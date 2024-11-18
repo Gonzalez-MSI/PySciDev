@@ -15,7 +15,7 @@ a1=a2=0.1/LightPipes.mm
 w = size/3.5
 z = 0 *LightPipes.cm
 dz = 2 *LightPipes.cm
-alpha = 1.0
+alpha = 20.0
 phi = (180 - 2*alpha) * np.pi/180
 n1 = 1.5
 fig, ax = plt.subplots(); ax.axis('off')
@@ -38,5 +38,4 @@ for i in range(1000):
 
 ani = animation.ArtistAnimation(fig, ims, interval=5, blit=True,
                                 repeat_delay=1000)
-ani.save("BesselBeamPropagation_a01.mp4")
-plt.show()
+ani.save("BesselBeamPropagation.mp4")

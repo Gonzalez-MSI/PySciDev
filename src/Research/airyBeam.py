@@ -34,4 +34,3 @@ for i in range(1000):
 ani = animation.ArtistAnimation(fig, ims, interval=5, blit=True,
                                 repeat_delay=1000)
 ani.save("AiryBeamPropagation.mp4")
-plt.show()
