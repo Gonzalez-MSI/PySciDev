@@ -15,7 +15,7 @@ ax.axis('off')  # Hide axis
 ims = []  # List to hold animation frames
 
 # Initial Gaussian beam parameters
-w0 = size/3.5  # Beam waist
+w0 = 1*LightPipes.mm  # Beam waist
 
 # Create initial Gaussian beam
 F0 = LightPipes.Begin(size, wavelength, N)
