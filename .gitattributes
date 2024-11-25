@@ -4,6 +4,7 @@
 # Python files
 *.py linguist-language=Python
 *.ipynb linguist-language=Python
+*.m linguist-language=Matlab
 
 # Exclude files from language statistics
 *.csv linguist-vendored
