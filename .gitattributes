@@ -8,3 +8,4 @@
 # Exclude files from language statistics
 *.csv linguist-vendored
 *.json linguist-vendored
+*.mp4 linguist-vendored
