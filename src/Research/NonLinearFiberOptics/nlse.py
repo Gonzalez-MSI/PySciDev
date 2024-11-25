@@ -1,4 +1,5 @@
 import numpy as np
+import scipy.special
 import matplotlib.pyplot as plt
 
 """
@@ -19,22 +20,27 @@ inverse group velocity with respect to angular frequency
 def sech(x):
     return 2/(np.exp(x) + np.exp(-x))
     
-fiblen = 5    # fiber length in units of L_D
+fiblen = 100    # fiber length in units of L_D
 beta2 = -1    # sign of GVD parameter beta_2
 N = 1         # soliton order 
 
 # --- Set simulation parameters --- #
-nt = 1024     # number of spectral points (FFT points)
-Tmax = 32     # FFT window size
+nt = 2048     # number of spectral points (FFT points)
+Tmax = 128     # FFT window size
 step_num = round(20*fiblen*np.power(N,2)) # number of z steps
 delta_z = fiblen/step_num   # step size in z
 delta_tau = (2*Tmax)/nt     # step size in tau
 
-
 t_ns = np.arange(-nt/2, nt/2-1)
 tau = delta_tau*t_ns                       # time array
 omega = np.fft.fftshift(t_ns)*(np.pi/Tmax) # omega array
-uu = sech(tau)  # initial pulse shape
+# Bessel function order
+q0 = 5
+# Beam waist
+w0 = 10                      
+# Bessel function modulation
+J0 = np.abs(scipy.special.jv(q0, tau))  
+uu = np.exp(-(pow(tau,2))/(pow(w0,2))) * J0  # initial pulse shape
 
 temp = np.fft.fftshift(np.fft.ifft(uu)) # Fouerier transform
 spectrum = np.power(np.abs(temp), 2)    # input spectrum
@@ -45,12 +51,12 @@ freq = np.fft.fftshift(omega)/(2*np.pi) # freq. array
 
 inout_pulsefig = plt.figure(figsize=(10, 8))
 ((ax1, ax2), (ax3, ax4)) = inout_pulsefig.subplots(2,2)
-ax1.plot(tau, np.abs(uu)**2, label=r'input shape')
+ax1.plot(tau, np.abs(uu)**2, label=r'Bessel beam (in)', linewidth=0.9)
 ax1.set_xlabel(r'Normalized Time')
 ax1.set_ylabel(r'Normalized Power')
+ax1.legend(loc='upper right')
 ax1.set_title('Input Pulse Shape')
 ax1.grid()
-ax1.legend()
 ax1.minorticks_on()
 ax1.tick_params(axis='both', which='both', direction='in', top=True, right=True, left=True, bottom=True, length=6, width=1)
 
@@ -80,12 +86,12 @@ temp = np.fft.fftshift(np.fft.ifft(uu)) # Fourier transform
 spectrum = np.power(np.abs(temp), 2)       # output spectrum
 spectrum = spectrum/max(spectrum)                # normalize
 
-ax3.plot(tau, np.abs(uu)**2, label=r'output shape', color='red')
+ax3.plot(tau, np.abs(uu)**2, label=r'Bessel beam (out)', color='red', linewidth=0.9)
 ax3.set_xlabel(r'Normalized Time')
 ax3.set_ylabel(r'Normalized Power')
 ax3.set_title('Output Pulse Shape')
-ax3.grid()
 ax3.legend(loc='upper right')
+ax3.grid()
 ax3.minorticks_on()
 ax3.tick_params(axis='both', which='both', direction='in', top=True, right=True, left=True, bottom=True, length=6, width=1)
 

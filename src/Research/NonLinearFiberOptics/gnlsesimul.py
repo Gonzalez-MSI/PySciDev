@@ -1,8 +1,8 @@
 import gnlse.envelopes
+import gnlse.visualization
 import numpy as np
 import matplotlib.pyplot as plt
 import gnlse
-from scipy.special import jv
 
 def Main():
     setup = gnlse.GNLSESetup()
@@ -30,9 +30,9 @@ def Main():
 
     # Input pulse parameters
     peak_power = 10000  # W
-    duration = 0.050  # ps
-    q = 0
-    alpha = 0.25
+    duration = 0.050    # ps
+    q = 5              # Bessel function order
+    alpha = 0.25        # Cone phisycal angle
 
     # This example extends the original code with additional simulations for
     pulse_models = [
@@ -43,7 +43,7 @@ def Main():
     ]
 
     count = len(pulse_models)
-    plt.figure(figsize=(14, 8), facecolor='w', edgecolor='k')
+    plt.figure(figsize=(18, 16), facecolor='w', edgecolor='k')
     for i, pulse_model in enumerate(pulse_models):
         print('%s...' % pulse_model.name)
 
@@ -51,14 +51,17 @@ def Main():
         solver = gnlse.GNLSE(setup)
         solution = solver.run()
 
-        plt.subplot(2, count, i + 1)
+        plt.subplot(3, count, i + 1)
         plt.title(pulse_model.name)
         gnlse.plot_wavelength_vs_distance(solution, WL_range=[400, 1400])
 
-        plt.subplot(2, count, i + 1 + count)
+        plt.subplot(3, count, i + 1 + count)
         gnlse.plot_delay_vs_distance(solution, time_range=[-0.5, 5])
 
+        plt.subplot(3, count, i + 1 + 2 * count)
+        gnlse.visualization.plot_spectra_at_distances(solution, [0, 0.005, 0.01, 0.02, 0.02, 0.05, 0.10, 0.15])
+        
     plt.tight_layout()
-    plt.show()
+    plt.savefig('SCGeneration.png', dpi=600)
     
 Main()
