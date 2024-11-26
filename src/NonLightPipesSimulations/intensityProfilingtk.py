@@ -79,6 +79,9 @@ class IntensityProfiler:
         # Create UI elements
         self.setup_ui()
         
+        # Initialize measurement frame
+        self.setup_measurement_frame()
+        
     def setup_ui(self):
         # Main container frame
         self.main_container = tk.Frame(self.root)
@@ -160,6 +163,21 @@ class IntensityProfiler:
         self.canvas_widget = FigureCanvasTkAgg(self.fig, self.right_frame)
         self.canvas_widget.get_tk_widget().pack(fill=tk.BOTH, expand=True)
         
+    def setup_measurement_frame(self):
+        """Create frame for measurements display"""
+        self.measure_frame = tk.Frame(self.right_frame, relief=tk.GROOVE, borderwidth=2)
+        self.measure_frame.pack(fill=tk.X, pady=5)
+        
+        # Labels for measurements
+        self.max_label = tk.Label(self.measure_frame, text="Maximum: --")
+        self.max_label.pack(side=tk.LEFT, padx=10)
+        
+        self.min_label = tk.Label(self.measure_frame, text="Minimum: --")
+        self.min_label.pack(side=tk.LEFT, padx=10)
+        
+        self.spacing_label = tk.Label(self.measure_frame, text="Fringe Spacing: --")
+        self.spacing_label.pack(side=tk.LEFT, padx=10)
+
     def load_image(self):
         file_path = filedialog.askopenfilename()
         if file_path:
@@ -312,6 +330,9 @@ class IntensityProfiler:
         self.ax.clear()
         self.ax.plot(range(num_points), profile)
         
+        # Add measurements calculation
+        self.calculate_measurements(profile)
+        
         # Add padding to y-axis limits
         y_min = np.min(profile)
         y_max = np.max(profile)
@@ -326,6 +347,31 @@ class IntensityProfiler:
         self.ax.tick_params(axis='both', which='both', top=True, right=True, direction='in', width=1.15)
         self.ax.grid(True)
         self.canvas_widget.draw()
+
+    def calculate_measurements(self, profile):
+        """Calculate profile measurements"""
+        # Min/Max values
+        min_val = np.min(profile)
+        max_val = np.max(profile)
+        
+        # Find peaks for fringe spacing
+        from scipy.signal import find_peaks
+        peaks, _ = find_peaks(profile, height=np.mean(profile))
+        
+        # Calculate average spacing if peaks found
+        if len(peaks) > 1:
+            spacings = np.diff(peaks)
+            avg_spacing = np.mean(spacings)
+        else:
+            avg_spacing = 0
+            
+        # Update labels
+        self.max_label.config(text=f"Maximum: {max_val:.1f}")
+        self.min_label.config(text=f"Minimum: {min_val:.1f}")
+        if avg_spacing > 0:
+            self.spacing_label.config(text=f"Fringe Spacing: {avg_spacing:.1f} pixels")
+        else:
+            self.spacing_label.config(text="Fringe Spacing: --")
 
     def plot_from_coordinates(self):
         try:

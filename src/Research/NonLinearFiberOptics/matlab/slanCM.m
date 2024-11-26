@@ -61,7 +61,6 @@ end
 
 slanCM_Data=load('slanCM_Data.mat');
 CList_Data=[slanCM_Data.slandarerCM(:).Colors];
-disp(slanCM_Data.author);
 
 if isnumeric(type)
     Cmap=CList_Data{type};
