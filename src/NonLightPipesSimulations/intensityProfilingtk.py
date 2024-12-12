@@ -327,8 +327,13 @@ class IntensityProfiler:
                 self.plot_profile(profile, num_points)
             
     def plot_profile(self, profile, num_points):
+        """Plot intensity profile in pixels and gray values"""
         self.ax.clear()
+        
+        # Plot with pixel units
         self.ax.plot(range(num_points), profile)
+        self.ax.set_xlabel("Position (pixels)")
+        self.ax.set_ylabel("Intensity (gray value)")
         
         # Add measurements calculation
         self.calculate_measurements(profile)
@@ -336,42 +341,36 @@ class IntensityProfiler:
         # Add padding to y-axis limits
         y_min = np.min(profile)
         y_max = np.max(profile)
-        y_padding = (y_max - y_min) * 0.1  # 10% padding
+        y_padding = (y_max - y_min) * 0.1
         
         self.ax.set_ylim([y_min - y_padding, y_max + y_padding])
         
         self.ax.set_title("Intensity Profile")
-        self.ax.set_xlabel("Position along line")
-        self.ax.set_ylabel("Intensity")
         self.ax.minorticks_on()
         self.ax.tick_params(axis='both', which='both', top=True, right=True, direction='in', width=1.15)
         self.ax.grid(True)
         self.canvas_widget.draw()
 
     def calculate_measurements(self, profile):
-        """Calculate profile measurements"""
-        # Min/Max values
+        """Calculate profile measurements in pixels and gray values"""
         min_val = np.min(profile)
         max_val = np.max(profile)
         
-        # Find peaks for fringe spacing
+        # Find peaks and calculate spacing in pixels
         from scipy.signal import find_peaks
         peaks, _ = find_peaks(profile, height=np.mean(profile))
         
-        # Calculate average spacing if peaks found
         if len(peaks) > 1:
             spacings = np.diff(peaks)
             avg_spacing = np.mean(spacings)
-        else:
-            avg_spacing = 0
-            
-        # Update labels
-        self.max_label.config(text=f"Maximum: {max_val:.1f}")
-        self.min_label.config(text=f"Minimum: {min_val:.1f}")
-        if avg_spacing > 0:
-            self.spacing_label.config(text=f"Fringe Spacing: {avg_spacing:.1f} pixels")
+            self.spacing_label.config(
+                text=f"Fringe Spacing: {avg_spacing:.1f} pixels")
         else:
             self.spacing_label.config(text="Fringe Spacing: --")
+        
+        # Update intensity labels with gray values
+        self.max_label.config(text=f"Maximum: {max_val:.1f}")
+        self.min_label.config(text=f"Minimum: {min_val:.1f}")
 
     def plot_from_coordinates(self):
         try:
@@ -429,6 +428,6 @@ if __name__ == "__main__":
 
     root = tk.Tk()
     root.title("Intensity Profile Analyzer")
-    root.geometry("1280x640")  # Increased from 1024x600
+    root.geometry("1280x680")  # Increased from 1024x600
     app = IntensityProfiler(root)
     root.mainloop()

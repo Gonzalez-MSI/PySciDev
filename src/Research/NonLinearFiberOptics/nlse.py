@@ -20,7 +20,7 @@ inverse group velocity with respect to angular frequency
 def sech(x):
     return 2/(np.exp(x) + np.exp(-x))
     
-fiblen = 100    # fiber length in units of L_D
+fiblen = 5    # fiber length in units of L_D
 beta2 = -1    # sign of GVD parameter beta_2
 N = 1         # soliton order 
 
@@ -37,9 +37,10 @@ omega = np.fft.fftshift(t_ns)*(np.pi/Tmax) # omega array
 # Bessel function order
 q0 = 5
 # Beam waist
-w0 = 10                      
+w0 = 1                 
 # Bessel function modulation
 J0 = np.abs(scipy.special.jv(q0, tau))  
+# uu = sech(tau)
 uu = np.exp(-(pow(tau,2))/(pow(w0,2))) * J0  # initial pulse shape
 
 temp = np.fft.fftshift(np.fft.ifft(uu)) # Fouerier transform
