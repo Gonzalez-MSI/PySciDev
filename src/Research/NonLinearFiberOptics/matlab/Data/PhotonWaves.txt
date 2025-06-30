@@ -1,0 +1,14 @@
+Onda semi-cuadrada (160mA Sop4)
+Distancia entre picos = 576ns
+Ancho de pulso = 453ns
+Frequencia de repeticion = 1.73MHz
+
+Onda sinusoidal (160mA Sop3)
+Distancia entre picos = 576ns
+Ancho de pulso = 276ns
+Frequencia de repeticion = 1.73MHz
+
+Onda sierra (160mA Sop1)
+Distancia entre picos = 574ns
+Ancho de pulso = 301ns
+Frequencia de repeticion = 1.74MHz

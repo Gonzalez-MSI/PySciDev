@@ -37,16 +37,15 @@ T = (-n/2:n/2 - 1).*dt; % time grid
 % === input pulse
 power = 10000;              % peak power of input [W]
 t0 = 28.4e-15;              % duration of input [s]
-% A = sqrt(power)*sech(T/t0); % input field [W^(1/2)]
+A = sqrt(power)*sech(T/t0); % input field [W^(1/2)]
 
 %******************* Bessel-gaussian beam *******************%
-q = 1;                          % Bessel function order
-Wo = 30;                        % Beam waist
-L = T/t0;
-J = abs(besselj(q,L));          % Bessel beam 1D envelope
-G = exp(-(L.^2)/(Wo.^2));       % Gaussian 1D envelope
-A = sqrt(power) * J.*G;                       % Bessel-Gaussian beam
-
+% q = 1;                          % Bessel function order
+% Wo = 30;                        % Beam waist
+% L = T/t0;
+% J = abs(besselj(q,L));          % Bessel beam 1D envelope
+% G = exp(-(L.^2)/(Wo.^2));       % Gaussian 1D envelope
+% A = sqrt(power) * J.*G;                       % Bessel-Gaussian beam
 
 % Plot the pulse profile
 figure()
@@ -61,7 +60,7 @@ set(gca, 'XMinorTick', 'on', 'YMinorTick', 'on', ...
 'LineWidth', 0.5);
 
 % === fibre parameters
-flength = 1;             % fibre length [m]
+flength = 0.15;             % fibre length [m]
 % betas = [beta2, beta3, ...] in units [s^2/m, s^3/m ...]
 betas = [-1.1830e-026, 8.1038e-041, -9.5205e-056,  2.0737e-070, ...
          -5.3943e-085,  1.3486e-099, -2.5495e-114,  3.0524e-129, ...
